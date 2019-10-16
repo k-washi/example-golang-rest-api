@@ -1,4 +1,4 @@
-package repositories
+package health
 
 //CreateHealthResponse return http status and description
 type CreateHealthResponse struct {

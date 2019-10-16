@@ -20,7 +20,7 @@ func GetHealthStatusOK(c *gin.Context) {
 	}
 	*/
 
-	result, err := services.HealthService.CreateRepo()
+	result, err := services.HealthService.GetHealth()
 	if err != nil {
 		c.JSON(err.GetStatus(), err)
 		return

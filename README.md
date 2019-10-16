@@ -12,3 +12,11 @@
     image:
     description: golangにより構築したREST API
 ```
+
+## Test
+
+```bash
+
+go test -v ./src/controllers/health/
+
+```
