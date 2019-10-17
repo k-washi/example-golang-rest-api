@@ -8,10 +8,11 @@ import (
 )
 
 type healthServiceInterface interface {
-	GetHealth() (*health.CreateHealthResponse, errors.ApiError)
+	GetHealth() (*health.CreateHealthResponse, errors.APIError)
 }
 
 var (
+	//HealthService health check service
 	HealthService healthServiceInterface
 )
 
@@ -21,7 +22,7 @@ func init() {
 	HealthService = &healthService{}
 }
 
-func (s *healthService) GetHealth() (*health.CreateHealthResponse, errors.ApiError) {
+func (s *healthService) GetHealth() (*health.CreateHealthResponse, errors.APIError) {
 	result := health.CreateHealthResponse{
 		Status:      http.StatusOK,
 		Description: "Health check OK",

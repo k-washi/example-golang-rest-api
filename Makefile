@@ -1,3 +1,4 @@
+#参考 - 現場で使える実践テクニック みんなのGO言語
 #メタ情報
 NAME := example-golang-rest-api
 VERSION := $(gobump show -r)

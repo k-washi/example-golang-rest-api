@@ -5,18 +5,26 @@
 
 ```yaml
 - path: "/example-golang-rest-api/"
-      - GET: {name: "name", description: "test", data: [{}, {}] }
-      - POST: {name: "name", description: "test", data: {id: 1, name: "test1" }}
-      - /health/: status:200 response and , {health: 200}
-    git: https://github.com/k-washi/example-golang-rest-api.git
-    image:
-    description: golangにより構築したREST API
+      GET: req: {name: "name"}, res: {name: "name", description: "test", data: [{post-data-1}, {post-data-2}] }
+      POST: req: {name: "name", description: "test", data: {id: 1, name: "test1" }}, res: {name: "name", message: "ok"}
+- path: /health/
+      GET: status:200 response and , {health: 200}
+- info:
+      git: https://github.com/k-washi/example-golang-rest-api.git
+      image:
+      description: golangにより構築したREST API
 ```
 
-## Test
+## make
 
 ```bash
 
-go test -v ./src/controllers/health/
+make help
+#bin/%:             build binaries ex. make bin/myproj
+#build:             build binary
+#deps:              Install dependencies
+#devel-deps:        Setup
+#lint:              Lint
+#test:              Run tests
 
 ```

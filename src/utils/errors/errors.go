@@ -2,7 +2,8 @@ package errors
 
 import "net/http"
 
-type ApiError interface {
+//APIError error interface
+type APIError interface {
 	GetStatus() int
 	GetMessage() string
 	GetError() string
@@ -27,7 +28,7 @@ func (e *apiError) GetError() string {
 }
 
 //NewBadRequestError create new error of bad request
-func NewBadRequestError(message string) ApiError {
+func NewBadRequestError(message string) APIError {
 	return &apiError{
 		Status:  http.StatusBadRequest,
 		Message: message,

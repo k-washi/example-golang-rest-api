@@ -22,10 +22,10 @@ type healthServiceMock struct {
 }
 
 var (
-	getHealthFunction func() (*health.CreateHealthResponse, errors.ApiError)
+	getHealthFunction func() (*health.CreateHealthResponse, errors.APIError)
 )
 
-func (m *healthServiceMock) GetHealth() (*health.CreateHealthResponse, errors.ApiError) {
+func (m *healthServiceMock) GetHealth() (*health.CreateHealthResponse, errors.APIError) {
 	return getHealthFunction()
 }
 
@@ -40,7 +40,7 @@ func TestGetHealthStatusOK(t *testing.T) {
 		Description: "Health check OK",
 	}
 
-	getHealthFunction = func() (*health.CreateHealthResponse, errors.ApiError) {
+	getHealthFunction = func() (*health.CreateHealthResponse, errors.APIError) {
 		return &exsistHealthResponse, nil
 	}
 
