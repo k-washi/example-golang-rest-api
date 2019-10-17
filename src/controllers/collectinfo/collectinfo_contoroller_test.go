@@ -14,19 +14,24 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-type postCollectInfoServiceMock struct {
+type collectInfoServiceMock struct {
 }
 
 var (
 	postCollectInfoServiceFunction func(collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError)
+	getCollectInfoServiceFunction  func() (*collectinfo.GetCollectInfoResponse, errors.APIError)
 )
 
-func (m *postCollectInfoServiceMock) CreateCollectInfo(input collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError) {
+func (m *collectInfoServiceMock) CreateCollectInfo(input collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError) {
 	return postCollectInfoServiceFunction(input)
 }
 
+func (m *collectInfoServiceMock) GetCollectInfo() (*collectinfo.GetCollectInfoResponse, errors.APIError) {
+	return getCollectInfoServiceFunction()
+}
+
 func init() {
-	services.CollectInfoService = &postCollectInfoServiceMock{}
+	services.CollectInfoService = &collectInfoServiceMock{}
 }
 
 func TestCreateInfoContorollerSuccess(t *testing.T) {
@@ -61,5 +66,39 @@ func TestCreateInfoContorollerSuccess(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, serviceResponse.Name, nameStr)
 	assert.Equal(t, serviceResponse.Message, messageStr)
+
+}
+func TestGetInfoContorollerSuccess(t *testing.T) {
+	contextName := `"name"`
+	serviceResponse := collectinfo.GetCollectInfoResponse{
+		Name:        contextName,
+		Description: "test",
+		Datas:       []collectinfo.CollectInfo{{ID: 1, Name: "test1"}, {ID: 123, Name: "test2"}},
+	}
+	getCollectInfoServiceFunction = func() (*collectinfo.GetCollectInfoResponse, errors.APIError) {
+		return &serviceResponse, nil
+	}
+
+	response := httptest.NewRecorder()
+	c, _ := gin.CreateTestContext(response)
+
+	jsonRequest := `{"name":` + contextName + `}`
+	request, _ := http.NewRequest(http.MethodPost, "/example-golang-rest-api", bytes.NewBuffer([]byte(jsonRequest)))
+	c.Request = request
+
+	GetInfo(c)
+
+	assert.EqualValues(t, http.StatusOK, response.Code)
+
+	//Conver the JSON response to a map
+	var collectInfoJSONResponse collectinfo.GetCollectInfoResponse
+	err := json.Unmarshal([]byte(response.Body.String()), &collectInfoJSONResponse)
+
+	//Grab the balue & whether or not it exists
+	assert.Nil(t, err)
+	assert.Equal(t, serviceResponse.Name, collectInfoJSONResponse.Name)
+	assert.Equal(t, serviceResponse.Description, collectInfoJSONResponse.Description)
+	assert.Equal(t, serviceResponse.Datas[0].ID, collectInfoJSONResponse.Datas[0].ID)
+	assert.Equal(t, serviceResponse.Datas[0].Name, collectInfoJSONResponse.Datas[0].Name)
 
 }

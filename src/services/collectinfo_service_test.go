@@ -14,10 +14,15 @@ type collectInfoDaoMock struct {
 
 var (
 	postCollectInfoDaoFunction func(collectinfo.CollectInfo) errors.APIError
+	getCollectInfoDaoFunction  func() (*collectinfo.GetCollectInfoResponse, errors.APIError)
 )
 
 func (m *collectInfoDaoMock) CreateInfoDao(input collectinfo.CollectInfo) errors.APIError {
 	return postCollectInfoDaoFunction(input)
+}
+
+func (m *collectInfoDaoMock) GetInfoDao() (*collectinfo.GetCollectInfoResponse, errors.APIError) {
+	return getCollectInfoDaoFunction()
 }
 
 func init() {
@@ -28,15 +33,6 @@ func TestCreateCollectInfoSuccess(t *testing.T) {
 	postCollectInfoDaoFunction = func(input collectinfo.CollectInfo) errors.APIError {
 		return nil
 	}
-
-	/*
-		response := httptest.NewRecorder()
-		c, _ := gin.CreateTestContext(response)
-
-		jsonRequest := `{"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}`
-		request, _ := http.NewRequest(http.MethodPost, "/example-golang-rest-api", bytes.NewBuffer([]byte(jsonRequest)))
-		c.Request = request
-	*/
 
 	collectData := collectinfo.CollectInfo{
 		ID:   1,
@@ -53,4 +49,21 @@ func TestCreateCollectInfoSuccess(t *testing.T) {
 	assert.Equal(t, result.Name, input.Name)
 	assert.Equal(t, result.Message, "create info and store database")
 	assert.Nil(t, err)
+}
+
+func TestGetCollectInfoSuccess(t *testing.T) {
+	getCollectInfoDaoFunction = func() (*collectinfo.GetCollectInfoResponse, errors.APIError) {
+		return &collectinfo.GetCollectInfoResponse{
+			Datas: []collectinfo.CollectInfo{{ID: 1, Name: "test1"}, {ID: 123, Name: "test2"}},
+		}, nil
+	}
+
+	result, err := CollectInfoService.GetCollectInfo()
+
+	assert.Nil(t, err)
+	assert.Equal(t, result.Name, "name")
+	assert.Equal(t, result.Description, "test")
+	assert.Equal(t, result.Datas[0].ID, 1)
+	assert.Equal(t, result.Datas[0].Name, "test1")
+
 }
