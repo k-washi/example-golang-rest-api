@@ -6,12 +6,12 @@
 ```yaml
 - path: "/example-golang-rest-api/"
       GET: req: {"name": "name"}, res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
-	POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "create info and store database"}
+      POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "create info and store database"}
 - path: /health/
-      GET: status:200 response and , {"health": 200}
+      GET: status:200 response and , res:{"health": 200}
 - info:
       git: https://github.com/k-washi/example-golang-rest-api.git
-      image:
+      image: kwashizaki/example-golang-rest-api
       description: golangにより構築したREST API
 ```
 
