@@ -10,7 +10,7 @@ import (
 )
 
 //CreateInfo collect {id, name} data
-//req: {name: "name", description: "test", data: {id: 1, name: "test1" }}, res: {name: "name", message: "ok"}
+//POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "c.."}
 func CreateInfo(c *gin.Context) {
 	var request collectinfo.CreateCollectInfoRequest
 
@@ -21,6 +21,29 @@ func CreateInfo(c *gin.Context) {
 	}
 
 	result, err := services.CollectInfoService.CreateCollectInfo(request)
+	if err != nil {
+		c.JSON(err.GetStatus(), err)
+		return
+	}
+
+	c.JSON(http.StatusCreated, result)
+
+}
+
+//GetInfo get [{id, name}] datas
+//req: {"name": "name"}, res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
+func GetInfo(c *gin.Context) {
+	var request collectinfo.GetCollectInfoRequest
+
+	if err := c.ShouldBindJSON(&request); err != nil {
+		apiErr := errors.NewBadRequestError("invalid json body")
+		c.JSON(apiErr.GetStatus(), apiErr)
+		return
+	}
+
+	//TODO
+	result, err := services.CollectInfoService.GetCollectInfo()
+
 	if err != nil {
 		c.JSON(err.GetStatus(), err)
 		return

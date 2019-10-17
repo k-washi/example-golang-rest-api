@@ -10,6 +10,7 @@ import (
 
 type collectInfoInterface interface {
 	CreateInfoDao(CollectInfo) errors.APIError
+	GetInfoDao() (*GetCollectInfoResponse, errors.APIError)
 }
 
 var (
@@ -42,5 +43,15 @@ func (d *collectInfoDao) CreateInfoDao(input CollectInfo) errors.APIError {
 	collectInfos[input.ID] = input
 
 	return nil
+
+}
+
+func (d *collectInfoDao) GetInfoDao() (*GetCollectInfoResponse, errors.APIError) {
+	var collectInfoList GetCollectInfoResponse
+	for _, v := range collectInfos {
+		collectInfoList.Datas = append(collectInfoList.Datas, v)
+	}
+
+	return &collectInfoList, nil
 
 }

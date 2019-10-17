@@ -9,6 +9,7 @@ import (
 
 type collectInfoServiceInterface interface {
 	CreateCollectInfo(collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError)
+	GetCollectInfo() (*collectinfo.GetCollectInfoResponse, errors.APIError)
 }
 
 var (
@@ -39,4 +40,21 @@ func (s *collectInfoService) CreateCollectInfo(input collectinfo.CreateCollectIn
 		Message: "create info and store database",
 	}
 	return &result, nil
+}
+
+//GetCollectInfo get data list
+func (s *collectInfoService) GetCollectInfo() (*collectinfo.GetCollectInfoResponse, errors.APIError) {
+
+	infoList, err := collectinfo.CollectInfoDao.GetInfoDao()
+	if err != nil {
+		return nil, errors.NewAPIError(err.GetStatus(), err.GetMessage())
+	}
+
+	result := collectinfo.GetCollectInfoResponse{
+		Name:        "name",
+		Description: "test",
+		Datas:       infoList.Datas,
+	}
+	return &result, nil
+
 }

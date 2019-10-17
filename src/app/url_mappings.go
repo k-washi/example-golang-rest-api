@@ -8,4 +8,6 @@ import (
 func mapUrls() {
 	router.GET("/health", health.GetHealthStatusOK)
 	router.POST("/example-golang-rest-api", collectinfo.CreateInfo)
+	router.GET("/example-golang-rest-api", collectinfo.GetInfo)
+
 }
