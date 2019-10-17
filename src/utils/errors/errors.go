@@ -34,3 +34,19 @@ func NewBadRequestError(message string) APIError {
 		Message: message,
 	}
 }
+
+//NewBadData input data is bad
+func NewBadData(message string) APIError {
+	return &apiError{
+		Status:  http.StatusBadRequest,
+		Message: message,
+	}
+}
+
+//NewAPIError internal api error
+func NewAPIError(statusCode int, message string) APIError {
+	return &apiError{
+		Status:  statusCode,
+		Message: message,
+	}
+}
