@@ -45,6 +45,7 @@ func TestGetHealthStatusOK(t *testing.T) {
 	}
 
 	response := httptest.NewRecorder()
+
 	c, _ := gin.CreateTestContext(response)
 
 	request, _ := http.NewRequest(http.MethodGet, "/health", nil)

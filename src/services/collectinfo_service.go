@@ -8,7 +8,7 @@ import (
 )
 
 type collectInfoServiceInterface interface {
-	CreateCollectInfoInfo(collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError)
+	CreateCollectInfo(collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError)
 }
 
 var (
@@ -23,7 +23,7 @@ func init() {
 }
 
 //StoreCollectInfo store info and return result
-func (s *collectInfoService) CreateCollectInfoInfo(input collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError) {
+func (s *collectInfoService) CreateCollectInfo(input collectinfo.CreateCollectInfoRequest) (*collectinfo.CreateCollectInfoResponse, errors.APIError) {
 	input.Name = strings.TrimSpace(input.Name)
 	if input.Name == "" {
 		return nil, errors.NewBadRequestError("Invalid collection info name")

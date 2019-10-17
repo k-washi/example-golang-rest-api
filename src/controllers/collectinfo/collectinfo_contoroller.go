@@ -20,7 +20,7 @@ func CreateInfo(c *gin.Context) {
 		return
 	}
 
-	result, err := services.CollectInfoService.CreateCollectInfoInfo(request)
+	result, err := services.CollectInfoService.CreateCollectInfo(request)
 	if err != nil {
 		c.JSON(err.GetStatus(), err)
 		return
