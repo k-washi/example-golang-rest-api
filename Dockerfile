@@ -16,3 +16,5 @@ RUN make bin/app
 FROM alpine
 COPY --from=build-step /go-app/bin/app /app
 ENTRYPOINT ["./app"]
+
+EXPOSE 8080
