@@ -1,7 +1,7 @@
 package collectinfo
 
 /*
-- path: "/example-golang-rest-api/"
+- path: "/api/ex-golang/rest-api/"
 	  GET: req: {"name": "name"}, res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
 	  POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "ok"}
 */

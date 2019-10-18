@@ -2,6 +2,10 @@ FROM golang:1.12.7-alpine3.10 as build-step
 
 RUN apk add --update --no-cache ca-certificates git make
 
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOARCH=amd64
+
 WORKDIR /go-app
 COPY go.mod .
 COPY go.sum .

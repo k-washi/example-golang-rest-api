@@ -5,9 +5,6 @@ VERSION := $(gobump show -r)
 REVISION := $(shell git rev-parse --short HEAD)
 LDFLAGS := "-X main.revision=$(REVISION)"
 
-export CGO_ENABLED=0
-export GOOS=linux
-export GOARCH=amd64
 export GO111MODULE=on
 
 ## Install dependencies
@@ -42,7 +39,11 @@ bin/%: ./src/main.go deps
 
 ## build binary
 .PHONY: build
-build: bin/app
+build: bin/app 
+	
+## mbuild binary on mac
+.PHONY: mbuild
+mbuild: mac/app
 
 ##Show heop
 .PHONY: help

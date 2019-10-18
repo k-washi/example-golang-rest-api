@@ -48,7 +48,7 @@ func TestCreateInfoContorollerSuccess(t *testing.T) {
 	c, _ := gin.CreateTestContext(response)
 
 	jsonRequest := `{"name":` + contextName + `, "description": "test", "data": {"id": 1, "name": "test1" }}`
-	request, _ := http.NewRequest(http.MethodPost, "/example-golang-rest-api", bytes.NewBuffer([]byte(jsonRequest)))
+	request, _ := http.NewRequest(http.MethodPost, "/rest-api", bytes.NewBuffer([]byte(jsonRequest)))
 	c.Request = request
 
 	CreateInfo(c)
@@ -83,7 +83,7 @@ func TestGetInfoContorollerSuccess(t *testing.T) {
 	c, _ := gin.CreateTestContext(response)
 
 	jsonRequest := `{"name":` + contextName + `}`
-	request, _ := http.NewRequest(http.MethodPost, "/example-golang-rest-api", bytes.NewBuffer([]byte(jsonRequest)))
+	request, _ := http.NewRequest(http.MethodPost, "/rest-api", bytes.NewBuffer([]byte(jsonRequest)))
 	c.Request = request
 
 	GetInfo(c)
