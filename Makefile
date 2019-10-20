@@ -40,10 +40,6 @@ bin/%: ./src/main.go deps
 ## build binary
 .PHONY: build
 build: bin/app 
-	
-## mbuild binary on mac
-.PHONY: mbuild
-mbuild: mac/app
 
 ##Show heop
 .PHONY: help

@@ -30,7 +30,12 @@ func (s *collectInfoService) CreateCollectInfo(input collectinfo.CreateCollectIn
 		return nil, errors.NewBadRequestError("Invalid collection info name")
 	}
 
-	err := collectinfo.CollectInfoDao.CreateInfoDao(input.Data)
+	data := collectinfo.CollectInfo{
+		ID:   input.ID,
+		Name: input.Data,
+	}
+
+	err := collectinfo.CollectInfoDao.CreateInfoDao(data)
 	if err != nil {
 		return nil, errors.NewAPIError(err.GetStatus(), err.GetMessage())
 	}

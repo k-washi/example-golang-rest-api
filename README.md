@@ -5,8 +5,8 @@
 
 ```yaml
 - path: "/rest-api/:8080"
-      GET: req: {"name": "name"}, res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
-      POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "create info and store database"}
+      GET: req: /*?name="something", res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
+      POST: req: {"name": "name", "description": "test", id": 1, "data": "test1"}, res: {"name": "name", "message": "create info and store database"}
 - path: /health/
       GET: status:200 response and , res:{"health": 200}
 - info:
@@ -36,6 +36,9 @@ make help
 ```bash
 docker build -t kwashizaki/example-golang-rest-api:v1.0.0 .
 docker run -it -p 8080:8080 --rm --name example-golang-rest-api kwashizaki/example-golang-rest-api:v1.0.0
+
+#no build
+docker build -t kwashizaki/example-vue-cli:v1.0.0 -f ./DockerfileNoBuild .
 ```
 
 Docker Hubへpush

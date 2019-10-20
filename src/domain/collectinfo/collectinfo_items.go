@@ -3,14 +3,15 @@ package collectinfo
 /*
 - path: "/api/ex-golang/rest-api/"
 	  GET: req: {"name": "name"}, res: {"name": "name", "description": "test", "datas": [{post-data-1}, {post-data-2}] }
-	  POST: req: {"name": "name", "description": "test", "data": {"id": 1, "name": "test1" }}, res: {"name": "name", "message": "ok"}
+	  POST: req: {"name": "name", "description": "test", "id": 1, "data": "test1" }, res: {"name": "name", "message": "ok"}
 */
 
 //CreateCollectInfoRequest request of post method
 type CreateCollectInfoRequest struct {
-	Name        string      `json:"name"`
-	Description string      `json:"description"`
-	Data        CollectInfo `json:"data"`
+	Name        string `form:"name" json:"name"`
+	Description string `form:"description" json:"description"`
+	ID          int    `form:"id" json:"id"`
+	Data        string `form:"data" json:"data"`
 }
 
 //CreateCollectInfoResponse response of post method

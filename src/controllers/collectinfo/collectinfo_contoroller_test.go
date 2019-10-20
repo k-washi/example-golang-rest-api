@@ -47,7 +47,7 @@ func TestCreateInfoContorollerSuccess(t *testing.T) {
 	response := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(response)
 
-	jsonRequest := `{"name":` + contextName + `, "description": "test", "data": {"id": 1, "name": "test1" }}`
+	jsonRequest := `{"name":` + contextName + `, "description": "test", id": 1, "data": "test1" }`
 	request, _ := http.NewRequest(http.MethodPost, "/rest-api", bytes.NewBuffer([]byte(jsonRequest)))
 	c.Request = request
 
@@ -69,9 +69,8 @@ func TestCreateInfoContorollerSuccess(t *testing.T) {
 
 }
 func TestGetInfoContorollerSuccess(t *testing.T) {
-	contextName := `"name"`
 	serviceResponse := collectinfo.GetCollectInfoResponse{
-		Name:        contextName,
+		Name:        "name",
 		Description: "test",
 		Datas:       []collectinfo.CollectInfo{{ID: 1, Name: "test1"}, {ID: 123, Name: "test2"}},
 	}
@@ -82,8 +81,7 @@ func TestGetInfoContorollerSuccess(t *testing.T) {
 	response := httptest.NewRecorder()
 	c, _ := gin.CreateTestContext(response)
 
-	jsonRequest := `{"name":` + contextName + `}`
-	request, _ := http.NewRequest(http.MethodPost, "/rest-api", bytes.NewBuffer([]byte(jsonRequest)))
+	request, _ := http.NewRequest(http.MethodPost, "/rest-api?name=name", nil)
 	c.Request = request
 
 	GetInfo(c)

@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "21b4e1f5-cf0f-4c08-98b3-f6aa384bc41d",
+		"name": "example-golang",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080//example-golang-rest-api",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"name\",\n\t\"description\": \"test\", \n\t\"data\": {\"id\": 5, \"name\": \"test1\" }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/rest-api",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest-api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080//example-golang-rest-api",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"name\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/rest-api",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rest-api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:80/api/ex-golang/health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/health",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

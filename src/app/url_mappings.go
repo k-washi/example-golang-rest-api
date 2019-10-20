@@ -9,5 +9,4 @@ func mapUrls() {
 	router.GET("/health", health.GetHealthStatusOK)
 	router.POST("/rest-api", collectinfo.CreateInfo)
 	router.GET("/rest-api", collectinfo.GetInfo)
-
 }

@@ -34,14 +34,11 @@ func TestCreateCollectInfoSuccess(t *testing.T) {
 		return nil
 	}
 
-	collectData := collectinfo.CollectInfo{
-		ID:   1,
-		Name: "test",
-	}
 	input := collectinfo.CreateCollectInfoRequest{
 		Name:        "test",
 		Description: "test desc",
-		Data:        collectData,
+		ID:          1,
+		Data:        "test",
 	}
 
 	result, err := CollectInfoService.CreateCollectInfo(input)

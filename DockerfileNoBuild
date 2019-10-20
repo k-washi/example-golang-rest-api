@@ -1,0 +1,8 @@
+FROM alpine
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+ENV GOARCH=amd64
+COPY bin/app .
+ENTRYPOINT ["/app"]
+
+EXPOSE 8080
