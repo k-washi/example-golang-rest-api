@@ -17,7 +17,9 @@ func OptionsMethodResponse() gin.HandlerFunc {
 			c.Writer.Header().Set("Access-Control-Max-Age", "86400")
 			c.Writer.Header().Set("Content-Type", "application/json")
 			c.JSON(http.StatusOK, gin.H{"status": "ok"})
+			c.Abort()
 		}
+		return
 
 	}
 }
