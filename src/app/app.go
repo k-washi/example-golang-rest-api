@@ -16,7 +16,7 @@ func init() {
 //StartApp call by main for starting app.
 func StartApp() {
 	router.Use(middleware.OptionsMethodResponse())
-	router.Use(middleware.HeaderSet())
+	//router.Use(middleware.HeaderSet())
 	mapUrls()
 
 	if err := router.Run(":8080"); err != nil {
